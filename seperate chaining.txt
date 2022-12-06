@@ -1,0 +1,134 @@
+
+public class Main
+{
+    private int size=20;
+    data[] hashtable=new data[size];
+    public int index(int key){
+        return key%size;
+    }
+    public void insert(data data1){
+        int key1=data1.data_key();
+        int value1=data1.data_value();
+        data next1=null;
+        int index1=index(key1);
+        if(hashtable[index1]==null){
+            hashtable[index1]=data1;
+        }
+        else{
+            data data2=hashtable[index1];
+            while(data2.data_next()!=null && data2.data_key()!=key1){
+                data2=data2.data_next();
+            }
+            data2.data_next1(data1);
+        }  
+    }
+    public void delete(data data1){
+       int key1=data1.data_key();
+        int value1=data1.data_value();
+        int index1=index(key1);
+        data start=hashtable[index1];
+        data end=start;
+        if(start==null){
+             System.out.println("No elements stored");
+        }
+        else if(start.data_key()==key1 && start.data_value()==value1){
+            if(start.data_next()!=null){
+            hashtable[index1]=start.data_next();
+            return;
+            }
+
+        hashtable[index1]=null;
+        return;
+    }
+        while(end.data_next()!=null && end.data_next().data_key()!=key1 && end.data_next().data_value()!=value1)
+             end=end.data_next();
+        if(end.data_next()==null){
+            System.out.println("element not found");
+            return;
+        }
+        //doubt
+        if(end.data_next().data_next()==null){
+            end.data_next1(null);
+            return;
+        }
+        end.data_next1(end.data_next().data_next());
+        hashtable[index1]=start;
+    }
+    public void display(int key){
+        int index1=index(key);
+        if(hashtable[index1]==null){
+            System.out.println("No elements found");
+        }
+        else{
+            data data1=hashtable[index1];
+            while(data1!=null){
+                System.out.print(data1.data_key()+":");
+                System.out.print(data1.data_value()+" ");
+                data1=data1.data_next();
+                
+            }
+        }
+    }
+    
+	public static void main(String[] args) {
+        Main m1=new Main();
+        data d1=new data(4,8);
+        data d2=new data(24,7);
+        m1.insert(d1);
+        m1.insert(d2);
+        System.out.println("Before del d2=24:7");
+        m1.display(4);
+        m1.delete(d2);
+         System.out.println();
+       
+         System.out.println("After del d2=24:7");
+       
+        m1.display(4);
+        
+        
+        
+	}
+}
+
+
+
+
+class data{
+    private int key;
+    private int value;
+    private data next;
+    data(int key1,int value1){
+        key=key1;
+        value=value1;
+        next=null;
+    }
+    int data_key(){
+        return key;
+        
+    }
+    
+    int data_value(){
+        return value;
+        
+    }
+    
+    data data_next(){
+        return next;
+    }
+    
+    void data_next1(data next1){
+        next=next1;
+    }
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+

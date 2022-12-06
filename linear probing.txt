@@ -1,0 +1,73 @@
+public class Main
+{ 
+    private int size=20;
+    data[] hashtable=new data[size];
+    int index(int key1){
+        return key1%size;
+    }
+    void insert(data data1){
+        int key1;
+        key1=data1.data_key();
+        int index1=index(key1);
+        while(hashtable[index1]!=null){
+            index1++;
+            if(index1==size){
+                index1=0;
+            }
+        }
+        hashtable[index1]=data1;
+    }
+    void delete(data data1){
+        int key1=data1.data_key();
+        int value1=data1.data_value();
+        int index1=index(key1);
+        while(hashtable[index1]!=null && hashtable[index1].data_value()==value1){
+            data data2=new data(-1,-1);
+            hashtable[index1]=data2;
+            System.out.println("Data deleetd");
+            break;
+        }
+        index1++;
+        if(index1==size){
+            index1=0;
+        }
+    }
+    
+    void display(){
+        for(int i=0;i<size;i++){
+            if(hashtable[i]!=null){
+                System.out.println(hashtable[i].data_key());
+                System.out.println(hashtable[i].data_value());
+            }
+        }
+    }
+    public static void main(String[] args) {
+		Main m1=new Main();
+		data d1=new data(15,6);
+		data d2=new data(28,4);
+		data d3=new data(12,9);
+		m1.insert(d1);
+		m1.insert(d2);
+		m1.insert(d3);
+		m1.delete(d2);
+		m1.display();
+		
+		
+			
+	}
+}
+class data{
+    private int key;
+    private int value;
+    data(int key1,int value1){
+        key=key1;
+        value=value1;
+    }
+    int data_key(){
+        return key;
+    }
+     int data_value(){
+        return value;
+    }
+}
+
